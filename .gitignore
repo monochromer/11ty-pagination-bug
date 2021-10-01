@@ -1,2 +1,4 @@
 node_modules
 dist
+netlify/functions/image/**
+!netlify/functions/image/index.js
