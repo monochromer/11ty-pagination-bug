@@ -1,3 +1,4 @@
+const { URLSearchParams } = require('url')
 // const { EleventyServerless } = require('@11ty/eleventy');
 const { builder } = require('@netlify/functions');
 const chromium = require('chrome-aws-lambda');
@@ -26,8 +27,7 @@ async function handler(event, context) {
   try {
     // let html = await elev.render();
 
-    console.log(event.queryStringParameters.url)
-    console.log(event.rawQuery)
+    const params = new URLSearchParams(event.rawQuery)
 
     // const browser = await puppeteer.launch();
     const browser = await puppeteer.launch({
@@ -45,7 +45,7 @@ async function handler(event, context) {
       height: 630
     })
     // https://doka-guide-platform-pr-413.surge.sh/html/input/index.og.html
-    await page.goto(event.queryStringParameters.url, {
+    await page.goto(params.get('url'), {
       waitUntil: 'networkidle2',
     });
     const imageBuffer = await page.screenshot({
