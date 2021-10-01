@@ -2,16 +2,13 @@
   "name": "11ty-pagination-bug",
   "scripts": {
     "start": "eleventy",
+    "build": "NODE_ENV=production eleventy",
     "debug": "DEBUG=Eleventy* eleventy",
     "clean": "rm -rf dist"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
-    "@11ty/eleventy": "^1.0.0-canary.41"
-=======
     "@11ty/eleventy": "^0.12.1",
     "@netlify/functions": "^0.7.2",
     "puppeteer": "^10.4.0"
->>>>>>> Stashed changes
   }
 }
