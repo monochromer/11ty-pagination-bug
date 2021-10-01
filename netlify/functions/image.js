@@ -27,8 +27,8 @@ async function handler(event, context) {
     // let html = await elev.render();
 
     const { queryStringParameters } = event
-
-    console.log(queryStringParameters)
+    console.dir(event.queryStringParameters)
+    console.dir(event.queryStringParameters)
 
     // const browser = await puppeteer.launch();
     const browser = await puppeteer.launch({
