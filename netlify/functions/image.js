@@ -37,7 +37,7 @@ async function handler(event, context) {
       waitUntil: 'networkidle2',
     });
     const imageBuffer = await page.screenshot({
-      encoding: 'base64'
+      // encoding: 'base64'
       // encoding: 'binary'
     })
     await browser.close();
@@ -47,7 +47,7 @@ async function handler(event, context) {
       heades: {
         'Content-Type': 'image/png'
       },
-      body: imageBuffer,
+      body: imageBuffer.toString('base64'),
       isBase64Encoded: true
     };
   } catch(error) {
