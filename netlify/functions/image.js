@@ -26,7 +26,7 @@ async function handler(event, context) {
   try {
     // let html = await elev.render();
 
-    console.log(event.queryStringParameters)
+    console.log(event.queryStringParameters.url)
     console.log(event.rawQuery)
 
     // const browser = await puppeteer.launch();
@@ -44,6 +44,7 @@ async function handler(event, context) {
       width: 1200,
       height: 630
     })
+    // https://doka-guide-platform-pr-413.surge.sh/html/input/index.og.html
     await page.goto(event.queryStringParameters.url, {
       waitUntil: 'networkidle2',
     });
