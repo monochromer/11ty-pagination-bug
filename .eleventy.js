@@ -1,12 +1,12 @@
 const { EleventyServerlessBundlerPlugin } = require('@11ty/eleventy');
 
-module.exports = function(evelentyConfig) {
+module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
     name: 'image',
     functionsDir: './netlify/functions/',
   });
 
-  evelentyConfig.addCollection('articles', collectionApi => {
+  eleventyConfig.addCollection('articles', collectionApi => {
     return collectionApi.getFilteredByGlob('src/articles/**/index.md');
   });
 
