@@ -28,6 +28,8 @@ async function handler(event, context) {
 
     const { queryStringParameters } = event
 
+    console.log(queryStringParameters)
+
     // const browser = await puppeteer.launch();
     const browser = await puppeteer.launch({
       args: chromium.args,
