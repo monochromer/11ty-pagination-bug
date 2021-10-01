@@ -1,0 +1,6 @@
+[[redirects]]
+from = "/image/"
+to = "/.netlify/functions/image"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "image"
