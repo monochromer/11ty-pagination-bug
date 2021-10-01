@@ -1,6 +1,7 @@
 // const { EleventyServerless } = require('@11ty/eleventy');
 const { builder } = require('@netlify/functions');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 
 // export interface Event {
 //   rawUrl: string
@@ -27,7 +28,16 @@ async function handler(event, context) {
 
     const { queryStringParameters } = event
 
-    const browser = await puppeteer.launch();
+    // const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: {
+        width: 1200,
+        height: 630,
+      },
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    });
     const page = await browser.newPage();
     await page.setViewport({
       width: 1200,
