@@ -46,7 +46,7 @@ async function handler(event, context) {
     })
     // https://doka-guide-platform-pr-413.surge.sh/html/input/index.og.html
     await page.goto(params.get('url'), {
-      waitUntil: 'networkidle2',
+      waitUntil: 'load',
     });
     const imageBuffer = await page.screenshot({
       // encoding: 'base64'
