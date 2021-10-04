@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/:tag/:articleId/images/covers/:type.png"
+  from = "/covers/:tag/:articleId/:type.png"
   to = "/.netlify/functions/image"
   query = {tag = ":tag", articleId = ":articleId", type = ":type"}
   status = 301
