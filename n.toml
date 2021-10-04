@@ -1,5 +1,0 @@
-# [[redirects]]
-# from = "/:tag/:articleId/images/covers/:type.png"
-# to = "/.netlify/functions/image?tag=:tag&articleId=:articleId&type=:type&"
-# status = 200
-# force = true
