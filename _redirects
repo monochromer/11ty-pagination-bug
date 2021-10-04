@@ -1,0 +1,3 @@
+/:tag/:articleId/images/covers/:type.png tag=:tag articleId=:articleId type=:type /social-card-render?tag=:tag&articleId=:articleId&type=:type 301
+
+/social-card-render /.netlify/functions/image 200
