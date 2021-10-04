@@ -1,9 +1,11 @@
 {
   "name": "11ty-pagination-bug",
   "scripts": {
-    "start": "NODE_ENV=production eleventy --watch",
+    "start": "npm run dev",
+    "dev": "NODE_ENV=development eleventy --serve",
     "build": "NODE_ENV=production eleventy",
     "debug": "DEBUG=Eleventy* eleventy",
+    "netlify": "netlify dev",
     "clean": "rm -rf dist"
   },
   "dependencies": {

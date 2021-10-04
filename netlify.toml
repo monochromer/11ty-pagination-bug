@@ -1,5 +1,10 @@
+[dev]
+  autoLaunch = false
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 8080
+
 [[redirects]]
-  from = "/covers/:tag/:articleId/:type.png"
+  from = "/:tag/:articleId/images/covers/:type.png"
   to = "/.netlify/functions/image"
-  query = {tag = ":tag", articleId = ":articleId", type = ":type"}
   status = 200
