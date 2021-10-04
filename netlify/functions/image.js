@@ -52,7 +52,7 @@ async function handler(event, context) {
     await page.setViewport(imageSize)
     const url = new URL(`/${params.get('tag')}/${params.get('articleId')}/index.og.html`, 'https://doka-guide-platform-pr-413.surge.sh')
     console.log('rendered url: ', url)
-    await page.goto(url, {
+    await page.goto(url.toString(), {
       waitUntil: 'domcontentloaded',
     });
     await page.evaluate(async () => {

@@ -2,9 +2,4 @@
   from = "/:tag/:articleId/images/covers/:type.png"
   to = "/social-card-render"
   query = {tag = ":tag", articleId = ":articleId", type = ":type"}
-  status = 301
-
-[[redirects]]
-  from = "/social-card-render"
-  to = "/.netlify/functions/image"
   status = 200
