@@ -2,6 +2,7 @@ const { URL, URLSearchParams } = require('url')
 const { builder } = require('@netlify/functions')
 const chromium = require('chrome-aws-lambda')
 const puppeteer = require('puppeteer-core')
+const crypto = require('crypto');
 
 const sizes = {
   og: {
@@ -70,7 +71,8 @@ async function handler(event, context) {
     return {
       statusCode: 200,
       heades: {
-        'Content-Type': 'image/png'
+        'Content-Type': 'image/png',
+        'ETag': crypto.createHash('md5').update(imageBuffer).digest('hex')
       },
       body: imageBuffer.toString('base64'),
       isBase64Encoded: true
