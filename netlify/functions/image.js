@@ -37,7 +37,7 @@ const sizes = {
 async function handler(event, context) {
   try {
     const params = new URLSearchParams(event.rawQuery)
-    const imageSize = sizes(param.get('type')) || sizes.og
+    const imageSize = sizes(params.get('type')) || sizes.og
 
     const browser = await puppeteer.launch({
       args: chromium.args,
