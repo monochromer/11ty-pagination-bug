@@ -1,7 +1,7 @@
 {
   "name": "11ty-pagination-bug",
   "scripts": {
-    "start": "eleventy",
+    "start": "NODE_ENV=production eleventy --watch",
     "build": "NODE_ENV=production eleventy",
     "debug": "DEBUG=Eleventy* eleventy",
     "clean": "rm -rf dist"
@@ -11,5 +11,8 @@
     "@netlify/functions": "^0.7.2",
     "chrome-aws-lambda": "^10.1.0",
     "puppeteer-core": "^10.4.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^6.9.28"
   }
 }

@@ -1,35 +1,44 @@
-const { URLSearchParams } = require('url')
-// const { EleventyServerless } = require('@11ty/eleventy');
-const { builder } = require('@netlify/functions');
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+const { URL, URLSearchParams } = require('url')
+const { builder } = require('@netlify/functions')
+const chromium = require('chrome-aws-lambda')
+const puppeteer = require('puppeteer-core')
 
-// export interface Event {
-//   rawUrl: string
-//   rawQuery: string
-//   path: string
-//   httpMethod: string
-//   headers: EventHeaders
-//   multiValueHeaders: EventMultiValueHeaders
-//   queryStringParameters: EventQueryStringParameters | null
-//   multiValueQueryStringParameters: EventMultiValueQueryStringParameters | null
-//   body: string | null
-//   isBase64Encoded: boolean
-// }
+const sizes = {
+  og: {
+    width: 1200,
+    height: 630
+  },
+  twitter: {
+    width: 1200,
+    height: 1200
+  }
+}
 
+/**
+ * @typedef {Object} Event
+ * @property {string} rawUrl
+ * @property {string} rawQuery
+ * @property {string} path
+ * @property {string} httpMethod
+ * @property {EventHeaders} headers
+ * @property {EventMultiValueHeaders} multiValueHeaders
+ * @property {EventQueryStringParameters | null}  queryStringParameters
+ * @property {EventMultiValueQueryStringParameters | null} multiValueQueryStringParameters
+ * @property {string | null} body
+ * @property {boolean} isBase64Encoded
+ */
 
+/**
+ *
+ * @param {Event} event
+ * @param {object} context
+ * @returns {object}
+ */
 async function handler(event, context) {
-  // let elev = new EleventyServerless('image', {
-  //   path: event.path,
-  //   query: event.queryStringParameters,
-  // });
-
   try {
-    // let html = await elev.render();
-
     const params = new URLSearchParams(event.rawQuery)
+    const imageSize = sizes(param.get('type')) || sizes.og
 
-    // const browser = await puppeteer.launch();
     const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: {
@@ -40,15 +49,17 @@ async function handler(event, context) {
       headless: chromium.headless,
     });
     const page = await browser.newPage();
-    await page.setViewport({
-      width: 1200,
-      height: 630
-    })
-    // https://doka-guide-platform-pr-413.surge.sh/html/input/index.og.html
-    await page.goto(params.get('url'), {
-      waitUntil: 'load',
+    await page.setViewport(imageSize)
+    const url = new URL(`/${params.get('tag')}/${params.get('articleId')}/index.og.html`, 'https://doka-guide-platform-pr-413.surge.sh')
+    await page.goto(url, {
+      waitUntil: 'domcontentloaded',
     });
+    await page.evaluate(async () => {
+      await document.fonts.ready
+    })
     const imageBuffer = await page.screenshot({
+      // fullPage: false
+      // type: 'png',
       // encoding: 'base64'
       // encoding: 'binary'
     })
